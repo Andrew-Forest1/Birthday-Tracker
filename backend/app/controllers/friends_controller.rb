@@ -35,7 +35,7 @@ class FriendsController < ApplicationController
     private
 
     def find_friend
-        @friend = Friend.Find(friend_params[:id])
+        @friend = Friend.find_by(id: params[:id])
     end
 
     def friend_params

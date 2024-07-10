@@ -6,7 +6,7 @@ class GiftsController < ApplicationController
     end
 
     def create
-        @gift = Gift.create!(friend_params)
+        @gift = Gift.create!(gift_params)
         render json: @gift, status: :created
     end
 
@@ -35,10 +35,10 @@ class GiftsController < ApplicationController
     private
 
     def find_gift
-        @gift = Gift.Find(gift_params[:id])
+        @gift = Gift.find_by(id: params[:id])
     end
 
     def gift_params
-        params.permit(:description, :price, :link)
+        params.permit(:description, :price, :link, :friend_id)
     end
 end
