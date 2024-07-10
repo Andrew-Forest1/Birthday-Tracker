@@ -5,6 +5,11 @@ class GiftsController < ApplicationController
         render json: Gift.all, status: :ok
     end
 
+    def create
+        @gift = Gift.create!(friend_params)
+        render json: @gift, status: :created
+    end
+
     def show
         if @gift
             render json: @gift, status: :ok

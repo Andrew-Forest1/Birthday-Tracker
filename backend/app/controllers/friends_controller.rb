@@ -5,6 +5,11 @@ class FriendsController < ApplicationController
         render json: Friend.all, status: :ok
     end
 
+    def create
+        @friend = Friend.create!(friend_params)
+        render json: @friend, status: :created
+    end
+
     def show
         if @friend
             render json: @friend, status: :ok
