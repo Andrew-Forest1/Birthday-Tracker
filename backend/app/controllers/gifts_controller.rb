@@ -19,8 +19,12 @@ class GiftsController < ApplicationController
     end
 
     def update
-        @gift.update!(gift_params)
-        render json: @gift, status: :accepted
+        if @gift
+            @gift.update!(gift_params)
+            render json: @gift, status: :accepted
+        else
+            render json: {error: "Gift Not Found"}, status: 404
+        end
     end 
 
     def destroy

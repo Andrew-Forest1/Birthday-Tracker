@@ -19,8 +19,12 @@ class FriendsController < ApplicationController
     end
 
     def update
-        @friend.update!(friend_params)
-        render json: @friend, status: :accepted
+        if @friend
+            @friend.update!(friend_params)
+            render json: @friend, status: :accepted
+        else
+            render json: {error: "Friend Not Found"}, status: 404
+        end
     end 
 
     def destroy
