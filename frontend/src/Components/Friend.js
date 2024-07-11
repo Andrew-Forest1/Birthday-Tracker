@@ -1,13 +1,17 @@
-import { useState, useEffect, useContext } from 'react';
 import Gifts from './Gifts';
+import NewGift from './NewGift';
+import { useNavigate } from "react-router-dom"
+import React, { useState } from 'react';
 
 function Friend({friend}){
+    const navigate = useNavigate()
+    const [addGift, setAddGift] = useState(false)
+    
     const handleEditFriend = () => {
-
     }
-
+    
     const handleAddGift = () => {
-
+        setAddGift(!addGift)
     }
 
     return(
@@ -16,8 +20,9 @@ function Friend({friend}){
             <p>{friend.address}</p>
             <p>{friend.birthday}</p>
             <button onClick={handleEditFriend}>Edit</button>
+            <h2>Gifts:</h2>
             <Gifts friend={friend}/> 
-            <button onClick={handleAddGift}>Add Gift</button>
+            {addGift ? <NewGift friend={friend}/> : <button onClick={handleAddGift}>Add Gift</button>}
         </div>
     )
 }

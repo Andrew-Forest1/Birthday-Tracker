@@ -1,5 +1,3 @@
-import { useState, useEffect, useContext } from 'react';
-
 function Gift({gift}){
     const handleEditGift = () => {
 
@@ -7,7 +5,7 @@ function Gift({gift}){
 
     return(
         <div className='Gift'>
-            <h1>{gift.description}</h1>
+            <h3>{gift.description}</h3>
             <p>{gift.price}</p>
             <a href={gift.link}>Link</a>
             <p></p>

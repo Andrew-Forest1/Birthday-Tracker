@@ -1,8 +1,10 @@
 import React, { useState, useEffect} from 'react';
 import Friend from './Friend';
+import { useNavigate } from "react-router-dom"
 
 function Friends({}){
     const [friends, setFriends] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch(`/friends`)
@@ -26,7 +28,7 @@ function Friends({}){
     })
 
     const handleAddFriend = () => {
-
+        navigate("/add_friend")
     }
 
     return (

@@ -1,11 +1,14 @@
 import {useState} from 'react'
+import { useNavigate } from "react-router-dom"
 
-function NewFriend({}){
+function NewFriend({friend}){
     const [newFriend, setNewFriend] = useState({
         name: "",
         address: "",
         birthday: ""
     })
+
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setNewFriend({...newFriend, [e.target.name]:e.target.value})
@@ -13,12 +16,6 @@ function NewFriend({}){
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        // const addNewUser = {
-        //     username: newUser.UserName,
-        //     password: newUser.Password,
-        //     address: newUser.Address
-        // }
 
         fetch("/friends", {
             method: 'POST',
@@ -29,7 +26,7 @@ function NewFriend({}){
         })
         .then(resp => {
             if (resp.ok) {
-
+                navigate(`/friends`)
             } else {
               resp.json().then(messageObj => alert(messageObj.error))
             }
@@ -42,11 +39,11 @@ function NewFriend({}){
     return (
         <form className="formInput" onSubmit={handleSubmit}>
             <label className="text">Name</label>
-            <input className="inputs" type="text" name="name" onChange={handleChange} value={newFriend.name} placeholder='Name'/>
+            <input className="inputs" type="text" name="name" onChange={handleChange} value={newFriend.name} placeholder={friend ? friend.name : 'Name'}/>
             <label className="text">Address</label>
-            <input className="inputs" type="text" name="Address" onChange={handleChange} value={newFriend.address} placeholder='Address'/>
+            <input className="inputs" type="text" name="address" onChange={handleChange} value={newFriend.address} placeholder='Address'/>
             <label className="text">Birthday</label>
-            <input className="inputs" type="date" onChange={handleChange} value={newFriend.birthday} placeholder='1/1/2000'/>
+            <input className="inputs" type="date" name="birthday" onChange={handleChange} value={newFriend.birthday} placeholder='1/1/2000'/>
             <button className="submitButton" type="submit">Submit</button>
         </form>
     )
