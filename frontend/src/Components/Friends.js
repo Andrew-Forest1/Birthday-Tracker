@@ -1,11 +1,16 @@
+import React, { useState, useEffect} from 'react';
+import Friend from './Friend';
+
 function Friends({}){
+    const [friends, setFriends] = useState([])
+
     useEffect(() => {
         fetch(`/friends`)
         .then((res) => {
           if(res.ok){
             res.json()
             .then((friends) => {
-                console.log(friends)
+                setFriends(friends)
             })
           } else {
             res.json()
@@ -14,9 +19,20 @@ function Friends({}){
         })
     }, []);
 
+    const displayFriends = friends.map(friend => {
+        return(
+            <Friend friend={friend}/>
+        )
+    })
+
+    const handleAddFriend = () => {
+
+    }
+
     return (
         <div>
-            
+            {displayFriends}
+            <button onClick={handleAddFriend}>Add Friend</button>
         </div>
     )
 }

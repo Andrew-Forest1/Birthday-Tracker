@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
+import Gifts from './Gifts';
 
 function Friend({friend}){
-    const [edit, setEdit] = useState(false)
-
     const handleEditFriend = () => {
 
     }
@@ -12,11 +11,12 @@ function Friend({friend}){
     }
 
     return(
-        <div>
+        <div className='Friend'>
             <h1>{friend.name}</h1>
             <p>{friend.address}</p>
             <p>{friend.birthday}</p>
             <button onClick={handleEditFriend}>Edit</button>
+            <Gifts friend={friend}/> 
             <button onClick={handleAddGift}>Add Gift</button>
         </div>
     )
