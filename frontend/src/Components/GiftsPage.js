@@ -21,7 +21,7 @@ function GiftsPage(){
 
     const displayGifts = gifts.map(gift => {
         return(
-            <Gift gift={gift}/>
+            <Gift gift={gift} friend={gift.friend}/>
         )
     })
 

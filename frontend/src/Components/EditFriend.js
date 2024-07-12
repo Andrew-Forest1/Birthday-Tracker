@@ -58,7 +58,7 @@ function EditFriend({friend, setEditFriend}){
             <label className="text">Birthday</label>
             <input className="inputs" type="date" name="birthday" onChange={handleChange} value={editFriend.birthday} placeholder={friend ? friend.birthday : '1/1/2000'}/>
             <button className="submitButton" type="submit">Submit</button>
-            <button className="cancleButton" onClick={handleCancle}>Cancle</button>
+            <button className="cancleButton" onClick={handleCancle}>Cancel</button>
         </form>
     )
 }

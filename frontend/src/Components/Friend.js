@@ -1,11 +1,9 @@
 import Gifts from './Gifts';
 import EditFriend from './EditFriend';
 import NewGift from './NewGift';
-import { useNavigate } from "react-router-dom"
 import React, { useState } from 'react';
 
 function Friend({friend}){
-    const navigate = useNavigate()
     const [addGift, setAddGift] = useState(false)
     const [editFriend, setEditFriend] = useState(false)
     

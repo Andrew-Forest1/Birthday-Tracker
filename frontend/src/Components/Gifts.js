@@ -3,7 +3,7 @@ import Gift from "./Gift"
 function Gifts({friend}){
     const displayGifts = friend.gifts.map(gift => {
         return(
-            <Gift gift={gift}/>
+            <Gift gift={gift} friend={friend}/>
         )
     })
 
