@@ -1,7 +1,10 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import { useNavigate } from "react-router-dom"
+import { FriendsContext } from './Context';
 
 function NewGift({friend, setAddGift}){
+    const {friends, setFriends} = useContext(FriendsContext)
+
     const [newGift, setNewGift] = useState({
         friend_id: friend.id,
         description: "",
@@ -27,7 +30,12 @@ function NewGift({friend, setAddGift}){
         })
         .then(resp => {
             if (resp.ok) {
-                navigate(`/gifts`)
+                resp.json()
+                .then((gift) => {
+                    friend.gifts = [...friend.gifts, gift]
+                    const index = friends.findIndex((e) => {return e.id == friend.id})
+                    setFriends([...friends.slice(0, index), friend, ...friends.slice(index + 1)])
+                })
             } else {
               resp.json().then(messageObj => alert(messageObj.error))
             }
