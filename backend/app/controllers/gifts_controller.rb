@@ -1,0 +1,48 @@
+class GiftsController < ApplicationController
+    before_action :find_gift, only: [:destroy, :show, :update]
+
+    def index
+        render json: Gift.all, status: :ok
+    end
+
+    def create
+        @gift = Gift.create!(gift_params)
+        render json: @gift, status: :created
+    end
+
+    def show
+        if @gift
+            render json: @gift, status: :ok
+        else
+            render json: {error: "Gift Not Found"}, status: 404
+        end
+    end
+
+    def update
+        if @gift
+            @gift.update!(gift_params)
+            render json: @gift, status: :accepted
+        else
+            render json: {error: "Gift Not Found"}, status: 404
+        end
+    end 
+
+    def destroy
+        if @gift
+            @gift.destroy
+            head :no_content
+        else
+            render json: {error: "Gift Not Found"}, status: 404
+        end
+    end
+
+    private
+
+    def find_gift
+        @gift = Gift.find_by(id: params[:id])
+    end
+
+    def gift_params
+        params.permit(:description, :price, :link, :friend_id)
+    end
+end
