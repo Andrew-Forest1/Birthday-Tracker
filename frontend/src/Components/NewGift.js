@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom"
 
-function NewGift({friend}){
+function NewGift({friend, setAddGift}){
     const [newGift, setNewGift] = useState({
         friend_id: friend.id,
         description: "",
@@ -37,6 +37,10 @@ function NewGift({friend}){
         })
     }
 
+    const handleCancle = () => {
+        setAddGift(false)
+    }
+
     return (
         <form className="formInput" onSubmit={handleSubmit}>
             <label className="text">Description</label>
@@ -46,6 +50,7 @@ function NewGift({friend}){
             <label className="text">Link</label>
             <input className="inputs" type="url" name="link" onChange={handleChange} value={newGift.link} placeholder='Link'/>
             <button className="submitButton" type="submit">Submit</button>
+            <button className="cancleButton" onClick={handleCancle}>Cancle</button>
         </form>
     )
 }

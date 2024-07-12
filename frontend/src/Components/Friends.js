@@ -1,9 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import Friend from './Friend';
 import { useNavigate } from "react-router-dom"
+import { FriendsContext } from './Context';
 
 function Friends({}){
-    const [friends, setFriends] = useState([])
+    const {friends, setFriends} = useContext(FriendsContext)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -21,11 +22,11 @@ function Friends({}){
         })
     }, []);
 
-    const displayFriends = friends.map(friend => {
+    const displayFriends = friends ? friends.map(friend => {
         return(
             <Friend friend={friend}/>
         )
-    })
+    }) : null
 
     const handleAddFriend = () => {
         navigate("/add_friend")
